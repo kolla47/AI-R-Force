@@ -2,6 +2,7 @@ import { Box, Grid } from "@mui/material";
 import { useState } from "react";
 import ArticlesSection from "../Components/KBSuggestion/ArticleSection";
 import CaseForm from "../Components/KBSuggestion/CaseForm";
+import AIGuidanceSection from "../Components/KBSuggestion/AIGuidanceSection"; // Add this import
 import { AzureOpenAI } from "openai";
 import { SearchClient, AzureKeyCredential } from "@azure/search-documents";
 import ConsoleLog from "../Components/Common/ConsoleLog";
@@ -31,20 +32,28 @@ const genClient = new AzureOpenAI({
   dangerouslyAllowBrowser: true,
 });
 
-// System prompt with few-shot examples for better AI response quality
-// const systemPromptNBS = `You are an assistant for airline agents. Given input in the format: subject##description##(RelevantKB in Markdown), analyze the user's context and the KB, then respond with the next best action the agent should take. Keep responses concise, practical, and based on the KB. Respond with only the recommended action, nothing else. Suggest additional info only if needed.`;
 // System prompts for AI processing
 const SYSTEM_PROMPTS = {
   STEP_BY_STEP: `You are an AI assistant helping airline agents resolve customer issues. 
-    Analyze the customer context and relevant KB article, then provide clear step-by-step guidance 
-    for the agent to follow.
-    
+    Analyze the provided case (subject and description) alongside the retrieved KB article. 
+    Your task is to determine whether the KB article is relevant to the case.
+    Do NOT include any statement like "Guidance for Agent" 
+
     Input format: subject##description##(RelevantKB in Markdown)
-    
-    Your response should be practical, actionable steps in plain text format without any 
-    markdown, bullets, or numbering. Focus on what the agent should do and say to resolve 
-    the customer's specific situation effectively.`,
+
+    If the KB article IS relevant:
+      - Provide clear, practical guidance for the agent based on the KB article.
+      - Keep it conversational and action-oriented.
+      - Do NOT include any statement like "The article is relevant".
+
+    If the KB article IS NOT relevant:
+      - Clearly state: "The retrieved KB article does not appear relevant to this case."
+      - Briefly explain why (e.g., mismatch in issue type, passenger status, flight condition).
+      - Do not fabricate steps from irrelevant information.
+
+    Always respond with only the guidance in markdown format — nothing else.`,
 };
+
 // Function to generate AI response with dynamic temperature
 async function generateText(prompt) {
   const response = await genClient.chat.completions.create({
@@ -105,13 +114,12 @@ async function searchKnowledgeBase(vector, searchText = "", top = 5) {
   return results;
 }
 
-// Utility function to add logs with optional delay
-
 // Main component
 export default function KBSuggestionPage() {
   const [logs, setLogs] = useState([]);
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [nbs, setNbs] = useState("");
 
   const addLog = async (setLogs, message, delay = 0) => {
     setLogs((prev) => [...prev, message]);
@@ -122,6 +130,7 @@ export default function KBSuggestionPage() {
   const handleCaseSubmit = async (formData) => {
     setLogs([]);
     setArticles([]);
+    setNbs("");
     setLoading(true);
 
     const { title, description } = formData;
@@ -181,9 +190,13 @@ export default function KBSuggestionPage() {
 
         const userPrompt = `${title}##${description}##${relevantArticle.KB}`;
         const nextAction = await generateText(userPrompt);
+        setNbs(nextAction);
         await addLog(setLogs, "=== Section: AI Guidance ===");
-
-        await addLog(setLogs, `${nextAction}`, 800);
+        await addLog(
+          setLogs,
+          "✅ AI guidance generated and displayed above!",
+          400
+        );
       }
     } catch (error) {
       console.error("Error in KB suggestion flow:", error);
@@ -205,7 +218,7 @@ export default function KBSuggestionPage() {
       }}
     >
       <Grid container spacing={2} sx={{ p: 2, height: "100%" }}>
-        {/* Left: Form + Articles */}
+        {/* Left: Form + AI Guidance + Articles */}
         <Grid size={7}>
           <CaseForm onSubmit={handleCaseSubmit} loading={loading} />
           <ArticlesSection articles={articles} loading={loading} />
@@ -213,6 +226,7 @@ export default function KBSuggestionPage() {
 
         {/* Right: Console Logs */}
         <Grid size={5}>
+          <AIGuidanceSection nbs={nbs} loading={loading} />
           <ConsoleLog logs={logs} loading={loading} />
         </Grid>
       </Grid>

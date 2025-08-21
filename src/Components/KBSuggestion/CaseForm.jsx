@@ -11,7 +11,7 @@ export default function CaseForm({ onSubmit, loading }) {
   };
 
   return (
-    <Paper elevation={3} sx={{ p: 3, borderRadius: 3 }}>
+    <Paper elevation={3} sx={{ p: 3, borderRadius: 3, mb: 2 }}>
       <Typography variant="h6" gutterBottom>
         Case Submission Form
       </Typography>

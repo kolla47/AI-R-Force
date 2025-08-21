@@ -5,7 +5,7 @@ export default function ArticlesSection({ articles }) {
   if (articles.length === 0) return null;
 
   return (
-    <Box sx={{ p: 2, mt: 2 }}>
+    <Box sx={{ p: 2, mb: 2 }}>
       <Typography variant="h6" gutterBottom>
         Knowledge Base Articles
       </Typography>

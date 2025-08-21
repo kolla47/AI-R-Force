@@ -169,11 +169,13 @@ export default function Dashboard() {
                   </Box>
                   <Typography variant="body2" color="text.secondary" paragraph>
                     <strong>Clustering:</strong> Historical resolved cases are
-                    embedded and clustered using Sentence-BERT + HDBSCAN.
+                    embedded and clustered using GPT model for case
+                    categorization.
                   </Typography>
                   <Typography variant="body2" color="text.secondary" paragraph>
                     <strong>Benchmarking:</strong> Clusters are evaluated
-                    against frequency, effort, and recurrence thresholds.
+                    against frequency and thresholds to identify valid clusters
+                    for processing.
                   </Typography>
                   <Typography variant="body2" color="text.secondary" paragraph>
                     <strong>Generation:</strong> Valid clusters trigger GPT to
@@ -263,12 +265,10 @@ export default function Dashboard() {
                 }}
               >
                 {[
-                  "Azure OpenAI (GPT-4, Ada-002)",
+                  "Azure OpenAI - GPT-4o-mini",
+                  "Azure OpenAI - text-embedding-3-small",
                   "Azure AI Search (Vector + Keyword Hybrid)",
-                  "Sentence-BERT / BERTopic (Clustering)",
-                  "HDBSCAN / UMAP (Unsupervised Learning)",
                   "React + MUI (Dashboard)",
-                  "Python (FastAPI, scikit-learn, langchain)",
                 ].map((tech, i) => (
                   <Typography key={i} component="li" variant="body2">
                     {tech}
@@ -329,7 +329,7 @@ export default function Dashboard() {
         style={{ textAlign: "center", marginTop: "60px" }}
       >
         <Typography variant="body2" color="text.secondary">
-          Built with ❤️ by AI-R Force | Hackathon 2024
+          Built with ❤️ by AI-R Force | Hackathon 2025
         </Typography>
       </motion.div>
     </Container>
