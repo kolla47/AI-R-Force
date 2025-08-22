@@ -1,12 +1,13 @@
 import { Box, Grid, LinearProgress, Typography, Paper } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import ArticlesSection from "../Components/KBSuggestion/ArticleSection";
 import CaseForm from "../Components/KBSuggestion/CaseForm";
 import AIGuidanceSection from "../Components/KBSuggestion/AIGuidanceSection";
 import { AzureOpenAI } from "openai";
 import { SearchClient, AzureKeyCredential } from "@azure/search-documents";
 import ConsoleLog from "../Components/Common/ConsoleLog";
-import guidanceRules from '../guidanceDisplayRules'
+import guidanceRules from "../guidanceDisplayRules";
 
 const searchClient = new SearchClient(
   process.env.REACT_APP_AZURE_SEARCH_ENDPOINT,
@@ -115,6 +116,9 @@ export default function KBSuggestionPage({ isAdminMode = true }) {
   const [nbs, setNbs] = useState("");
   const [progress, setProgress] = useState(0);
   const [currentStep, setCurrentStep] = useState("");
+  const [hasQueryParams, setHasQueryParams] = useState(false);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
 
   const addLog = async (setLogs, message, delay = 0) => {
     setLogs((prev) => [...prev, message]);
@@ -133,7 +137,7 @@ export default function KBSuggestionPage({ isAdminMode = true }) {
       const progress = Math.min(elapsed / duration, 1);
       const currentValue = startValue + (endValue - startValue) * progress;
       setProgress(Math.round(currentValue));
-      
+
       if (progress < 1) {
         requestAnimationFrame(animate);
       }
@@ -172,7 +176,7 @@ export default function KBSuggestionPage({ isAdminMode = true }) {
       }
 
       const embedding = await getEmbedding(queryText);
-      
+
       if (isAdminMode) {
         await addLog(
           setLogs,
@@ -193,7 +197,10 @@ export default function KBSuggestionPage({ isAdminMode = true }) {
 
       if (isAdminMode) {
         await addLog(setLogs, "=== Section: Search ===");
-        await addLog(setLogs, "🌐 Performing hybrid search in knowledge base...");
+        await addLog(
+          setLogs,
+          "🌐 Performing hybrid search in knowledge base..."
+        );
         await addLog(setLogs, "⏳ Awaiting search results...", 800);
       } else {
         updateProgress("Analyzing results...", 35);
@@ -207,13 +214,16 @@ export default function KBSuggestionPage({ isAdminMode = true }) {
         if (results.length === 0) {
           await addLog(setLogs, "📭 No relevant articles found.");
         } else {
-          await addLog(setLogs, `🎯 Found ${results.length} matching articles!`);
+          await addLog(
+            setLogs,
+            `🎯 Found ${results.length} matching articles!`
+          );
           results.forEach((article, idx) =>
             addLog(
               setLogs,
-              `📄 [${idx + 1}] "${article.title}" (Score: ${article.score.toFixed(
-                3
-              )})`
+              `📄 [${idx + 1}] "${
+                article.title
+              }" (Score: ${article.score.toFixed(3)})`
             )
           );
         }
@@ -239,7 +249,7 @@ export default function KBSuggestionPage({ isAdminMode = true }) {
         const userPrompt = `${title}%%${description}%%${relevantArticle.KB}%%${guidanceRules}`;
         const nextAction = await generateText(userPrompt);
         setNbs(nextAction);
-        
+
         if (isAdminMode) {
           await addLog(setLogs, "=== Section: AI Guidance ===");
           await addLog(
@@ -268,6 +278,20 @@ export default function KBSuggestionPage({ isAdminMode = true }) {
     }
   };
 
+  // Check for query parameters on component mount
+  useEffect(() => {
+    const title = searchParams.get("title");
+    const description = searchParams.get("description");
+    console.log("Query Params:", title, description);
+    if (title && description) {
+      setHasQueryParams(true);
+      // Automatically submit the form with query params
+      handleCaseSubmit({ title, description });
+    } else {
+      setHasQueryParams(false);
+    }
+  }, [location.search]);
+
   return (
     <Box
       sx={{
@@ -279,8 +303,11 @@ export default function KBSuggestionPage({ isAdminMode = true }) {
     >
       <Grid container spacing={2} sx={{ p: 2, height: "100%" }}>
         <Grid size={7}>
-          <CaseForm onSubmit={handleCaseSubmit} loading={loading} />
-          
+          {/* Only render CaseForm if there are no query params */}
+          {!hasQueryParams && (
+            <CaseForm onSubmit={handleCaseSubmit} loading={loading} />
+          )}
+
           {!isAdminMode && loading && (
             <Paper sx={{ p: 3, mb: 2 }}>
               <Typography variant="h6" gutterBottom>
@@ -289,17 +316,17 @@ export default function KBSuggestionPage({ isAdminMode = true }) {
               <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
                 {currentStep}
               </Typography>
-              <LinearProgress 
-                variant="determinate" 
-                value={progress} 
+              <LinearProgress
+                variant="determinate"
+                value={progress}
                 sx={{ height: 8, borderRadius: 4 }}
               />
-              <Typography variant="body2" sx={{ mt: 1, textAlign: 'center' }}>
+              <Typography variant="body2" sx={{ mt: 1, textAlign: "center" }}>
                 {progress}%
               </Typography>
             </Paper>
           )}
-          
+
           <ArticlesSection articles={articles} loading={loading} />
         </Grid>
 

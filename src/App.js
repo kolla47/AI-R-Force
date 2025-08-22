@@ -4,6 +4,7 @@ import KBSuggestionPage from "./Pages/KBSuggestion";
 import Navbar from "./Components/Common/Navbar";
 import KBGeneration from "./Pages/KBGeneration";
 import Dashboard from "./Pages/Dashboard";
+import { BrowserRouter} from "react-router-dom";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("Dashboard");
@@ -49,13 +50,15 @@ export default function App() {
         fontFamily: "'Roboto', sans-serif",
       }}
     >
-      <Navbar 
-        currentPage={currentPage} 
-        onPageChange={handlePageChange} 
-        isAdminMode={isAdminMode}
-        onToggleMode={toggleMode}
-      />
-      {<Box sx={{ mt: 8 }}>{renderPage()}</Box>}
+      <BrowserRouter>
+        <Navbar
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+          isAdminMode={isAdminMode}
+          onToggleMode={toggleMode}
+        />
+        {<Box sx={{ mt: 8 }}>{renderPage()}</Box>}
+      </BrowserRouter>
     </Box>
   );
 }
