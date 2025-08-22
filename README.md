@@ -11,7 +11,7 @@
 
 Airline customer service teams face a critical challenge:
 
-- Agents waste **hours** manually searching through outdated or unstructured knowledge bases.
+- Agents take **hours** to manually searching through outdated or unstructured knowledge bases.
 - Recurring issues are resolved inconsistently due to lack of standardized solutions.
 - High agent turnover and training costs compound the problem.
 
@@ -29,6 +29,8 @@ Airline customer service teams face a critical challenge:
 - ⚡ **Real-Time KB Suggestions**: Surfaces the most relevant help content when a new case arrives.
 - 🤖 **AI-Powered Resolution Guide**: Generates step-by-step instructions tailored to the current issue.
 - 🔐 **Enterprise Ready**: Includes SME approval workflows and PII redaction.
+- 🔐 **Multilingual**: Supports multiple languages.
+- 🔐 **consistent and intelligent Response**: Includes SME approval workflows and PII redaction.
 
 ---
 
@@ -75,7 +77,7 @@ Helps agents resolve new cases instantly:
 | 🔁 **Scalability**       | Automatically adapts to new issues   |
 | 👥 **Agent Experience**  | Less burnout, faster onboarding      |
 
-> **SmartKB turns tribal knowledge into institutional intelligence.**
+> **SmartKB turns raw knowledge into institutional intelligence.**
 
 ---
 
@@ -89,10 +91,12 @@ Helps agents resolve new cases instantly:
 
 ## 🤝 Team: AI-R Force
 
-- _Member 1_: [Name] – Full-stack Development
-- _Member 2_: [Name] – AI/ML Engineering
-- _Member 3_: [Name] – UX/UI & Frontend
-- _Member 4_: [Name] – Cloud & DevOps
+- Akhil Kolla
+- Shipra Singh
+- Rajvinder Kaur
+- Venkata Ramayya
+- Treutelaar, Max
+- Kishore N
 
 ---
 
