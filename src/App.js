@@ -7,15 +7,30 @@ import Dashboard from "./Pages/Dashboard";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("Dashboard");
+  const [isAdminMode, setIsAdminMode] = useState(false);
 
   const handlePageChange = (event, newValue) => {
+    if (!isAdminMode && newValue !== "KBSuggestion") {
+      return;
+    }
     setCurrentPage(newValue);
   };
 
+  const toggleMode = () => {
+    setIsAdminMode(!isAdminMode);
+    if (!isAdminMode) {
+      setCurrentPage("KBSuggestion");
+    }
+  };
+
   const renderPage = () => {
+    if (!isAdminMode) {
+      return <KBSuggestionPage isAdminMode={isAdminMode} />;
+    }
+
     switch (currentPage) {
       case "KBSuggestion":
-        return <KBSuggestionPage />;
+        return <KBSuggestionPage isAdminMode={isAdminMode} />;
       case "KBGeneration":
         return <KBGeneration />;
       case "Dashboard":
@@ -34,7 +49,12 @@ export default function App() {
         fontFamily: "'Roboto', sans-serif",
       }}
     >
-      <Navbar currentPage={currentPage} onPageChange={handlePageChange} />
+      <Navbar 
+        currentPage={currentPage} 
+        onPageChange={handlePageChange} 
+        isAdminMode={isAdminMode}
+        onToggleMode={toggleMode}
+      />
       {<Box sx={{ mt: 8 }}>{renderPage()}</Box>}
     </Box>
   );
