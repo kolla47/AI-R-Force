@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Card,
@@ -18,14 +18,12 @@ import ReactMarkdown from "react-markdown";
 const AIGuidanceSection = ({ nbs, loading }) => {
   const [expanded, setExpanded] = useState(false);
 
-  //   // Auto-expand when new NBS content arrives
-  //   useEffect(() => {
-  //     if (nbs && !expanded) {
-  //       setExpanded(true);
-  //     }
-  //   }, [nbs, expanded]);
+  useEffect(() => {
+    if (nbs && nbs.trim() !== "" && !expanded) {
+      setExpanded(true);
+    }
+  }, [nbs, expanded]);
 
-  // Don't render anything if no NBS content
   if (!nbs || nbs.trim() === "") {
     return null;
   }
