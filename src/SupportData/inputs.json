@@ -1,0 +1,110 @@
+[
+  {
+    "subject": "Flight Delay Compensation Request",
+    "body": "
+Dear Customer Service,
+My flight from Mumbai to Frankfurt on August 10th was delayed by over 4 hours due to operational issues. This caused me to miss an important meeting and incur additional expenses. I would like to know if I'm eligible for compensation under your delay policy.
+Thank you,
+Akhil Kolla
+"
+  },
+  {
+    "subject": "Flight Cancellation – Refund Request",
+    "body": "
+Hello,
+My flight from Hyderabad to Delhi on August 5th was cancelled without prior notice. I was not offered an alternate flight and had to book a last-minute ticket with another airline. Please process a full refund for my unused ticket.
+Regards,
+Akhil Kolla
+"
+  },
+  {
+    "subject": "Refund Not Received for Cancelled Ticket",
+    "body": "
+Hi Team,
+I cancelled my ticket for flight AI202 scheduled on July 28th due to a medical emergency. The ticket was refundable, but I haven't received the refund yet. Kindly check and update me on the status.
+Thanks,
+Akhil Kolla
+"
+  },
+  {
+    "subject": "Missed Connection Due to Flight Delay",
+    "body": "
+Dear Support,
+I missed my connecting flight from Dubai to London because my inbound flight from Hyderabad was delayed by 2.5 hours. I had to stay overnight and rebook the next day. Please advise on compensation or reimbursement options.
+Sincerely,
+Akhil Kolla
+"
+  },
+  {
+    "subject": "Damaged Baggage Claim",
+    "body": "
+Hello,
+Upon arrival in Bangalore on August 12th, I found my suitcase severely damaged. The handle was broken and the wheels were missing. I reported it at the airport and filed a PIR. Please assist with the compensation process.
+Regards,
+Akhil Kolla
+"
+  },
+  {
+    "subject": "Delayed Baggage – Request for Update",
+    "body": "
+Hi,
+My checked baggage did not arrive with me on flight AI301 from Hyderabad to Singapore on August 15th. I filed a report at the airport but haven't received any update. Please let me know when I can expect delivery.
+Thanks,
+Akhil Kolla
+"
+  },
+  {
+    "subject": "Reimbursement Request for Emergency Purchases",
+    "body": "
+Dear Team,
+Due to delayed baggage on my flight to Paris, I had to purchase essential items including clothing and toiletries. I've attached the receipts. Kindly process reimbursement as per your policy.
+Best,
+Akhil Kolla
+"
+  },
+  {
+    "subject": "Broken Seat During Flight – Compensation Request",
+    "body": "
+Hello,
+On my recent flight from Delhi to Chennai, my seat recline was broken and the tray table wouldn't stay up. It made the journey very uncomfortable. I'd like to request compensation for the inconvenience.
+Regards,
+Akhil Kolla
+"
+  },
+  {
+    "subject": "Lost Baggage Claim – Urgent",
+    "body": "
+Hi,
+My baggage was lost on flight AI405 from Hyderabad to New York on August 8th. It's been over 72 hours and I haven't received any update. The bag contains important documents and electronics. Please escalate and assist urgently.
+Thank you,
+Akhil Kolla
+"
+  },
+  {
+    "subject": "Voucher Redemption Issue",
+    "body": "
+Dear Customer Care,
+I received a travel voucher after a flight cancellation last month, but I'm unable to redeem it on your website. It shows as expired even though it's within the validity period. Please help resolve this.
+Thanks,
+Akhil Kolla
+"
+  },
+  {
+    "subject": "In-Flight Entertainment Not Working",
+    "body": "
+Hello,
+During my flight from Mumbai to London, the entertainment system at my seat was not working. The screen was blank and the crew couldn't fix it. It was a long flight and quite uncomfortable. I'd appreciate a goodwill gesture.
+Regards,
+Akhil Kolla
+"
+  },
+  {
+    "subject": "International Baggage Delay – Compensation Request",
+    "body": "
+Hi,
+My baggage was delayed on my international flight from Hyderabad to Toronto. I received it after 3 days and had to buy essentials. I've attached the PIR and receipts. Please advise on compensation.
+Sincerely,
+Akhil Kolla
+"
+  }
+]

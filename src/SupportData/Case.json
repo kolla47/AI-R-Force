@@ -1,0 +1,447 @@
+[
+    {
+        "case_data": {
+            "caseid": "DB001",
+            "title": "Denied Boarding due to Overbooking",
+            "description": "Customer was denied boarding as the flight was overbooked beyond capacity.",
+            "customerid": "CUST001",
+            "flight_number": "AI202",
+            "departure": "DEL",
+            "arrival": "BLR",
+            "scheduled_departure": "2025-08-10T08:00:00Z"
+        },
+        "resolution_note": "Customer was denied boarding due to overbooking. Rebooked on next available flight and provided meal vouchers.",
+        "compensations": [
+            {
+                "type": "Meal Voucher",
+                "details": "INR 500"
+            },
+            {
+                "type": "Flight Rebooking",
+                "details": "AI204, same day, 12:00 PM"
+            }
+        ],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Customer expressed frustration over delay. Apologized and offered compensation."
+            },
+            {
+                "type": "email",
+                "description": "Sent confirmation of rebooking and voucher details."
+            }
+        ]
+    },
+    {
+        "case_data": {
+            "caseid": "DB002",
+            "title": "Denied Boarding due to Missing ID",
+            "description": "Customer was unable to board due to not carrying a valid government-issued ID.",
+            "customerid": "CUST002",
+            "flight_number": "AI305",
+            "departure": "HYD",
+            "arrival": "MAA",
+            "scheduled_departure": "2025-08-12T06:30:00Z"
+        },
+        "resolution_note": "Customer did not carry valid ID. Educated on travel requirements and rebooked for next day.",
+        "compensations": [],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Explained ID policy and rebooking options."
+            },
+            {
+                "type": "phonecall",
+                "description": "Confirmed rebooking for next day with customer."
+            }
+        ]
+    },
+    {
+        "case_data": {
+            "caseid": "DB003",
+            "title": "Denied Boarding due to Late Arrival",
+            "description": "Customer arrived at the gate after closure and was denied boarding.",
+            "customerid": "CUST003",
+            "flight_number": "AI410",
+            "departure": "BOM",
+            "arrival": "GOI",
+            "scheduled_departure": "2025-08-14T09:45:00Z"
+        },
+        "resolution_note": "Customer arrived after gate closure. Rebooked on next flight and offered lounge access.",
+        "compensations": [
+            {
+                "type": "Lounge Access",
+                "details": "Mumbai Domestic Lounge"
+            },
+            {
+                "type": "Flight Rebooking",
+                "details": "AI412, same day, 14:00 PM"
+            }
+        ],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Customer accepted resolution and appreciated lounge access."
+            },
+            {
+                "type": "email",
+                "description": "Sent updated itinerary and lounge pass."
+            }
+        ]
+    },
+    {
+        "case_data": {
+            "caseid": "DB004",
+            "title": "Denied Boarding due to System Error",
+            "description": "Customer was not listed in the boarding system due to a technical glitch.",
+            "customerid": "CUST004",
+            "flight_number": "AI512",
+            "departure": "BLR",
+            "arrival": "DEL",
+            "scheduled_departure": "2025-08-15T07:00:00Z"
+        },
+        "resolution_note": "Customer was not on boarding list due to system glitch. Provided upgrade and apology.",
+        "compensations": [
+            {
+                "type": "Seat Upgrade",
+                "details": "Business Class"
+            },
+            {
+                "type": "Apology Letter",
+                "details": "Sent via email"
+            }
+        ],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Logged system error and escalated to IT."
+            },
+            {
+                "type": "email",
+                "description": "Sent apology and upgrade confirmation."
+            }
+        ]
+    },
+    {
+        "case_data": {
+            "caseid": "DB005",
+            "title": "Denied Boarding due to Oversized Carry-On",
+            "description": "Customer refused to check in an oversized carry-on bag and was denied boarding.",
+            "customerid": "CUST005",
+            "flight_number": "AI620",
+            "departure": "MAA",
+            "arrival": "COK",
+            "scheduled_departure": "2025-08-16T10:15:00Z"
+        },
+        "resolution_note": "Customer refused to check oversized carry-on. Educated on baggage policy and rebooked.",
+        "compensations": [],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Customer was upset but accepted rebooking after explanation."
+            },
+            {
+                "type": "email",
+                "description": "Sent baggage policy and rebooking confirmation."
+            }
+        ]
+    },
+    {
+        "case_data": {
+            "caseid": "SB001",
+            "title": "Rude Behavior by Check-in Staff",
+            "description": "Customer reported that the check-in staff was dismissive and unhelpful during baggage drop.",
+            "customerid": "CUST101",
+            "flight_number": "AI701",
+            "departure": "DEL",
+            "arrival": "PNQ",
+            "scheduled_departure": "2025-08-05T07:30:00Z"
+        },
+        "resolution_note": "Apologized to customer and escalated staff conduct to airport supervisor. Offered travel voucher as goodwill.",
+        "compensations": [
+            {
+                "type": "Travel Voucher",
+                "details": "INR 1000"
+            }
+        ],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Customer was visibly upset and requested formal complaint be logged."
+            },
+            {
+                "type": "email",
+                "description": "Sent apology and voucher details."
+            }
+        ]
+    },
+    {
+        "case_data": {
+            "caseid": "SB002",
+            "title": "Cabin Crew Ignored Assistance Request",
+            "description": "Customer requested help with overhead luggage but was ignored by cabin crew.",
+            "customerid": "CUST102",
+            "flight_number": "AI802",
+            "departure": "BLR",
+            "arrival": "HYD",
+            "scheduled_departure": "2025-08-06T09:00:00Z"
+        },
+        "resolution_note": "Apologized and assured corrective training for crew. Provided lounge access for next flight.",
+        "compensations": [
+            {
+                "type": "Lounge Access",
+                "details": "BLR Domestic Lounge"
+            }
+        ],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Customer appreciated the follow-up and accepted resolution."
+            },
+            {
+                "type": "email",
+                "description": "Sent lounge pass and apology note."
+            }
+        ]
+    },
+    {
+        "case_data": {
+            "caseid": "SB003",
+            "title": "Gate Agent Raised Voice",
+            "description": "Customer reported that gate agent raised voice during boarding query.",
+            "customerid": "CUST103",
+            "flight_number": "AI903",
+            "departure": "MAA",
+            "arrival": "COK",
+            "scheduled_departure": "2025-08-07T11:15:00Z"
+        },
+        "resolution_note": "Spoke to gate staff and issued internal warning. Customer offered priority boarding on next flight.",
+        "compensations": [
+            {
+                "type": "Priority Boarding",
+                "details": "Applied to next booking"
+            }
+        ],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Customer requested assurance that staff would be held accountable."
+            },
+            {
+                "type": "email",
+                "description": "Sent confirmation of priority boarding benefit."
+            }
+        ]
+    },
+    {
+        "case_data": {
+            "caseid": "SB004",
+            "title": "Inappropriate Comment by Crew",
+            "description": "Customer reported that a crew member made an inappropriate personal comment.",
+            "customerid": "CUST104",
+            "flight_number": "AI1004",
+            "departure": "GOI",
+            "arrival": "DEL",
+            "scheduled_departure": "2025-08-08T13:45:00Z"
+        },
+        "resolution_note": "Crew member was reported to HR for review. Customer offered seat upgrade and written apology.",
+        "compensations": [
+            {
+                "type": "Seat Upgrade",
+                "details": "Business Class"
+            },
+            {
+                "type": "Apology Letter",
+                "details": "Sent via email"
+            }
+        ],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Customer requested anonymity in complaint handling."
+            },
+            {
+                "type": "email",
+                "description": "Sent apology and upgrade confirmation."
+            }
+        ]
+    },
+    {
+        "case_data": {
+            "caseid": "SB005",
+            "title": "Staff Ignored Elderly Passenger",
+            "description": "Customer witnessed staff ignoring an elderly passenger needing assistance.",
+            "customerid": "CUST105",
+            "flight_number": "AI1105",
+            "departure": "COK",
+            "arrival": "BOM",
+            "scheduled_departure": "2025-08-09T15:00:00Z"
+        },
+        "resolution_note": "Thanked customer for reporting. Staff reminded of assistance protocols. Offered free seat selection on next flight.",
+        "compensations": [
+            {
+                "type": "Free Seat Selection",
+                "details": "Applied to next booking"
+            }
+        ],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Customer emphasized importance of elderly care."
+            },
+            {
+                "type": "email",
+                "description": "Sent confirmation of seat selection benefit."
+            }
+        ]
+    },
+    {
+        "case_data": {
+            "caseid": "IB001",
+            "title": "Charged Twice for Same Booking",
+            "description": "Customer was charged twice for the same flight booking due to a payment gateway error.",
+            "customerid": "CUST201",
+            "flight_number": "AI301",
+            "departure": "DEL",
+            "arrival": "BLR",
+            "scheduled_departure": "2025-08-03T06:00:00Z"
+        },
+        "resolution_note": "Verified duplicate transaction and processed refund for the extra charge. Apologized for inconvenience.",
+        "compensations": [
+            {
+                "type": "Refund",
+                "details": "INR 4500"
+            }
+        ],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Customer shared transaction screenshots for verification."
+            },
+            {
+                "type": "email",
+                "description": "Sent refund confirmation and apology."
+            }
+        ]
+    },
+    {
+        "case_data": {
+            "caseid": "IB002",
+            "title": "Incorrect Currency Conversion",
+            "description": "Customer was billed in USD instead of INR, resulting in higher charges due to conversion fees.",
+            "customerid": "CUST202",
+            "flight_number": "AI402",
+            "departure": "HYD",
+            "arrival": "MAA",
+            "scheduled_departure": "2025-08-04T08:30:00Z"
+        },
+        "resolution_note": "Identified billing system error. Issued partial refund for conversion fees and corrected billing profile.",
+        "compensations": [
+            {
+                "type": "Partial Refund",
+                "details": "INR 1200"
+            }
+        ],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Customer requested billing in local currency for future bookings."
+            },
+            {
+                "type": "email",
+                "description": "Sent refund details and updated billing preferences."
+            }
+        ]
+    },
+    {
+        "case_data": {
+            "caseid": "IB003",
+            "title": "Extra Charges for Seat Selection",
+            "description": "Customer was charged for seat selection despite choosing a free seat option.",
+            "customerid": "CUST203",
+            "flight_number": "AI503",
+            "departure": "BOM",
+            "arrival": "GOI",
+            "scheduled_departure": "2025-08-05T10:45:00Z"
+        },
+        "resolution_note": "Confirmed system glitch in seat pricing. Refunded seat selection fee and flagged issue to IT.",
+        "compensations": [
+            {
+                "type": "Refund",
+                "details": "INR 350"
+            }
+        ],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Customer appreciated quick resolution and refund."
+            },
+            {
+                "type": "email",
+                "description": "Sent refund receipt and confirmation of issue escalation."
+            }
+        ]
+    },
+    {
+        "case_data": {
+            "caseid": "FD001",
+            "title": "Flight Delayed Due to Weather",
+            "description": "Customer's flight was delayed by 4 hours due to heavy fog at the departure airport.",
+            "customerid": "CUST301",
+            "flight_number": "AI801",
+            "departure": "DEL",
+            "arrival": "BOM",
+            "scheduled_departure": "2025-08-02T06:00:00Z"
+        },
+        "resolution_note": "Apologized for delay caused by weather conditions. Provided meal voucher and rebooking flexibility.",
+        "compensations": [
+            {
+                "type": "Meal Voucher",
+                "details": "INR 600"
+            },
+            {
+                "type": "Flexible Rebooking",
+                "details": "Customer allowed to reschedule within 7 days without fee"
+            }
+        ],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Customer accepted compensation and appreciated proactive communication."
+            },
+            {
+                "type": "email",
+                "description": "Sent voucher and rebooking instructions."
+            }
+        ]
+    },
+    {
+        "case_data": {
+            "caseid": "FD002",
+            "title": "Technical Issue Caused Flight Delay",
+            "description": "Customer's flight was delayed by 3 hours due to a last-minute technical inspection.",
+            "customerid": "CUST302",
+            "flight_number": "AI902",
+            "departure": "BLR",
+            "arrival": "HYD",
+            "scheduled_departure": "2025-08-03T09:30:00Z"
+        },
+        "resolution_note": "Explained delay due to mandatory safety checks. Offered lounge access and apology.",
+        "compensations": [
+            {
+                "type": "Lounge Access",
+                "details": "BLR Domestic Lounge"
+            }
+        ],
+        "activities": [
+            {
+                "type": "note",
+                "description": "Customer was initially frustrated but calmed after explanation."
+            },
+            {
+                "type": "email",
+                "description": "Sent lounge pass and apology message."
+            }
+        ]
+    }
+]
