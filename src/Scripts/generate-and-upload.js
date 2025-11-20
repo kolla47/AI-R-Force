@@ -16,6 +16,41 @@ const __dirname = dirname(__filename);
 const kbDataPath = join(__dirname, '../SupportData/KB.json');
 const documents = JSON.parse(readFileSync(kbDataPath, 'utf-8'));
 
+// Helper function to verify documents in index
+async function verifyDocumentsInIndex(searchClient, expectedCount, maxRetries = 3, delayMs = 2000) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      console.log(`🔍 Verification attempt ${attempt}/${maxRetries}...`);
+      
+      const searchResults = await searchClient.search("*", {
+        select: ["id"],
+        top: 100,
+        includeTotalCount: true
+      });
+
+      const actualCount = searchResults.count;
+      console.log(`   Found ${actualCount}/${expectedCount} documents in index`);
+
+      if (actualCount >= expectedCount) {
+        console.log('✅ Verification successful! All documents are in the index.');
+        return true;
+      }
+
+      if (attempt < maxRetries) {
+        console.log(`   ⏳ Waiting ${delayMs/1000}s for indexing to complete...`);
+        await new Promise(resolve => setTimeout(resolve, delayMs));
+      }
+    } catch (error) {
+      console.error(`   ⚠️ Verification attempt ${attempt} failed:`, error.message);
+      if (attempt < maxRetries) {
+        await new Promise(resolve => setTimeout(resolve, delayMs));
+      }
+    }
+  }
+  
+  return false;
+}
+
 async function main() {
   // Validate environment variables
   const embeddingApiKey = process.env.REACT_APP_AZURE_EMBEDDING_API_KEY;
@@ -86,12 +121,41 @@ async function main() {
   // 4. Upload to Azure AI Search
   console.log("⬆️ Uploading to Azure AI Search...");
 
-  await searchClient.uploadDocuments(docsWithVectors).catch((err) => {
-    console.error("❌ Error uploading documents:", err);
-    throw err;
-  });
+  const uploadResult = await searchClient.uploadDocuments(docsWithVectors);
+  
+  // Check upload result details
+  console.log(`📊 Upload Results:
+  - Total documents: ${uploadResult.results.length}
+  - Succeeded: ${uploadResult.results.filter(r => r.succeeded).length}
+  - Failed: ${uploadResult.results.filter(r => !r.succeeded).length}`);
 
-  console.log("✅ Successfully uploaded all documents to Azure AI Search!");
+  // Show any failures
+  const failures = uploadResult.results.filter(r => !r.succeeded);
+  if (failures.length > 0) {
+    console.error("❌ Failed documents:");
+    failures.forEach(failure => {
+      console.error(`   - ${failure.key}: ${failure.errorMessage}`);
+    });
+    throw new Error(`${failures.length} documents failed to upload`);
+  }
+
+  console.log("✅ Upload operation completed successfully!");
+
+  // 5. Verify documents are in the index with retry logic
+  console.log("\n🔎 Verifying documents in index...");
+  const verified = await verifyDocumentsInIndex(searchClient, documents.length);
+
+  if (!verified) {
+    console.error("\n❌ Verification failed: Documents not found in index after multiple attempts.");
+    console.error("   Possible issues:");
+    console.error("   - Indexing is taking longer than expected");
+    console.error("   - Documents were uploaded to wrong index");
+    console.error("   - Index configuration issue");
+    console.error("\n   Please check Azure Portal manually or wait a few more minutes and run verify-index.js");
+    process.exit(1);
+  }
+
+  console.log("\n🎉 Success! All documents uploaded and verified in Azure AI Search!");
 }
 
 main().catch((err) => {

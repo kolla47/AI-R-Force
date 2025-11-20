@@ -55,7 +55,7 @@ node src/Scripts/createIndex.js
 
 ### Step 2: Generate Embeddings and Upload KB Documents
 
-This generates embeddings for all KB articles and uploads them to Azure AI Search.
+This generates embeddings for all KB articles and uploads them to Azure AI Search with automatic verification.
 
 ```bash
 node src/Scripts/generate-and-upload.js
@@ -65,6 +65,7 @@ node src/Scripts/generate-and-upload.js
 - Reads KB documents from `src/SupportData/KB.json`
 - Generates embeddings using Azure OpenAI `text-embedding-3-small`
 - Uploads documents with vectors to Azure AI Search
+- **Automatically verifies** documents are in the index (up to 3 retry attempts)
 
 **Expected Output:**
 ```
@@ -74,8 +75,22 @@ node src/Scripts/generate-and-upload.js
 🔤 Generating embeddings...
 ✅ Generated 12 embeddings.
 ⬆️ Uploading to Azure AI Search...
-✅ Successfully uploaded all documents to Azure AI Search!
+📊 Upload Results:
+  - Total documents: 12
+  - Succeeded: 12
+  - Failed: 0
+✅ Upload operation completed successfully!
+
+🔎 Verifying documents in index...
+🔍 Verification attempt 1/3...
+   Found 12/12 documents in index
+✅ Verification successful! All documents are in the index.
+
+🎉 Success! All documents uploaded and verified in Azure AI Search!
 ```
+
+**Retry Logic:**
+The script automatically verifies documents are indexed and retries up to 3 times with 2-second delays if they're not immediately available (indexing can take a few seconds).
 
 ## Troubleshooting
 
