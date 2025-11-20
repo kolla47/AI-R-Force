@@ -153,7 +153,7 @@ export default function ClaimProcessor() {
         // Replace mathematical expressions with their evaluated results
         // Match patterns like: "field": number + number + number
         jsonString = jsonString.replace(
-          /("(?:totalRequested|totalApproved)":\s*)([0-9+\-*\/.\s]+)(?=,|\})/g,
+          /("(?:totalRequested|totalApproved)":\s*)([0-9+\-*/.\\s]+)(?=,|})/g,
           (match, prefix, expression) => {
             try {
               // Safely evaluate the mathematical expression

@@ -1,6 +1,6 @@
 import { Box, Grid, LinearProgress, Typography, Paper } from "@mui/material";
 import { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import ArticlesSection from "../Components/KBSuggestion/ArticleSection";
 import CaseForm from "../Components/KBSuggestion/CaseForm";
 import AIGuidanceSection from "../Components/KBSuggestion/AIGuidanceSection";
@@ -118,7 +118,6 @@ export default function KBSuggestionPage({ isAdminMode = true }) {
   const [currentStep, setCurrentStep] = useState("");
   const [hasQueryParams, setHasQueryParams] = useState(false);
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
 
   const addLog = async (setLogs, message, delay = 0) => {
     setLogs((prev) => [...prev, message]);
@@ -280,6 +279,7 @@ export default function KBSuggestionPage({ isAdminMode = true }) {
 
   // Check for query parameters on component mount
   useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
     const title = searchParams.get("title");
     const description = searchParams.get("description");
     console.log("Query Params:", title, description);
@@ -290,6 +290,7 @@ export default function KBSuggestionPage({ isAdminMode = true }) {
     } else {
       setHasQueryParams(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
   return (
