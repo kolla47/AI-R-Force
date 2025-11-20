@@ -36,11 +36,7 @@ export default function CaseForm({ onSubmit, loading }) {
           required
           fullWidth
           multiline
-<<<<<<< HEAD
           rows={5}
-=======
-          rows={4}
->>>>>>> 154486d34c63febd52a2aa56abaf9c2a78c65f6f
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />

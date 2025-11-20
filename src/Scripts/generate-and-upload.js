@@ -172,23 +172,21 @@ const documents = [
   },
 ];
 
-const endpoint = process.env.REACT_APP_AZURE_GENERATION_ENDPOINT;
+const endpoint = "https://aa-genai-train-foundry.cognitiveservices.azure.com/";
 
 async function main() {
-  const apiKey = process.env.REACT_APP_AZURE_EMBEDDING_API_KEY;
+  const apiKey = ""; // TODO: Add your Azure OpenAI API key here
   const apiVersion = "2024-02-01";
-  const deployment = process.env.REACT_APP_AZURE_EMBEDDING_DEPLOYMENT;
+  const deployment = "text-embedding-3-small";
   const options = { endpoint, apiKey, deployment, apiVersion };
   // 1. Initialize Azure OpenAI Embeddings Client
   const openaiClient = new AzureOpenAI(options);
 
   // 2. Initialize Azure AI Search Client
   const searchClient = new SearchClient(
-    process.env.REACT_APP_AZURE_SEARCH_ENDPOINT,
-    process.env.REACT_APP_AZURE_SEARCH_INDEX,
-    new AzureKeyCredential(
-      process.env.REACT_APP_AZURE_SEARCH_KEY
-    )
+    "https://ai-r-search.search.windows.net",
+    "ai-r-kb-index",
+    new AzureKeyCredential("") // TODO: Add your Azure Search API key here
   );
 
   // 4. Generate embeddings
@@ -216,13 +214,10 @@ async function main() {
   // 5. Upload to Azure AI Search
   console.log("⬆️ Uploading to Azure AI Search...");
 
-  await searchClient
-    .uploadDocuments(docsWithVectors)
-    .then(() => console.log("✅ Upload successful"))
-    .catch((err) => {
-      console.error("❌ Error uploading documents:", err);
-      throw err;
-    });
+  await searchClient.uploadDocuments(docsWithVectors).catch((err) => {
+    console.error("❌ Error uploading documents:", err)
+    throw err;
+  });
 }
 
 main().catch((err) => {

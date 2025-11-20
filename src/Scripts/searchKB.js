@@ -5,9 +5,8 @@ import { SearchClient, AzureKeyCredential } from "@azure/search-documents";
 const endpoint = "https://ai-r-foundry.cognitiveservices.azure.com/";
 const searchEndpoint = "https://ai-r-search.search.windows.net";
 const indexName = "kb-index";
-const apiKey =
-  "";
-const searchKey = "";
+const apiKey = ""; // TODO: Add your Azure OpenAI API key here
+const searchKey = ""; // TODO: Add your Azure Search API key here
 const deployment = "text-embedding-3-small"; // or your actual deployment name
 const apiVersion = "2024-04-01-preview";
 const embeddingModel = "text-embedding-3-large"; // must match training

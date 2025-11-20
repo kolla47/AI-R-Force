@@ -16,6 +16,7 @@ import {
   Storage,
   CheckCircle,
 } from "@mui/icons-material";
+import archDiagram from "../SupportData/Arch.png";
 
 export default function Dashboard() {
   const theme = useTheme();
@@ -315,6 +316,40 @@ export default function Dashboard() {
                     {item}
                   </Typography>
                 ))}
+              </Box>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Architecture Diagram */}
+        <motion.div
+          variants={itemVariants}
+          style={{ marginTop: "40px", cursor: "pointer" }}
+          onClick={() => window.open(archDiagram, "_blank")}
+        >
+          <Card
+            sx={{
+              borderRadius: 4,
+              border: "1px solid #e0e0e0",
+              bgcolor: "#fafafa",
+              boxShadow: 2,
+            }}
+          >
+            <CardContent>
+              <Box display="flex" alignItems="center" mb={2}>
+                <Avatar sx={{ bgcolor: "primary.main", mr: 2 }}>
+                  <Storage />
+                </Avatar>
+                <Typography variant="h6" fontWeight="bold">
+                  Architecture Diagram
+                </Typography>
+              </Box>
+              <Box sx={{ textAlign: "center", mt: 3 }}>
+                <img
+                  src={archDiagram}
+                  alt="Architecture Diagram"
+                  style={{ maxWidth: "100%", height: "auto", borderRadius: "8px", boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}
+                />
               </Box>
             </CardContent>
           </Card>

@@ -16,14 +16,10 @@ export default function Navbar({
   onToggleMode,
 }) {
   return (
-<<<<<<< HEAD
     <AppBar
       position="fixed"
       sx={{ backgroundColor: "#1976d2", zIndex: 1300, minHeight: "0px" }}
     >
-=======
-    <AppBar position="fixed" sx={{ backgroundColor: "#1976d2", zIndex: 1300 }}>
->>>>>>> 154486d34c63febd52a2aa56abaf9c2a78c65f6f
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           AI-R-Force
@@ -43,10 +39,7 @@ export default function Navbar({
             <Tab label="Dashboard" value="Dashboard" />
             <Tab label="KB Generation" value="KBGeneration" />
             <Tab label="KB Suggestion" value="KBSuggestion" />
-<<<<<<< HEAD
             <Tab label="Claim Processor" value="ClaimProcessor" />
-=======
->>>>>>> 154486d34c63febd52a2aa56abaf9c2a78c65f6f
           </Tabs>
         )}
         <Box sx={{ mr: 2, display: "flex", alignItems: "center" }}>

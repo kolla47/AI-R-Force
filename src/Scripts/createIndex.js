@@ -47,7 +47,7 @@ export default async function createIndexRest() {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      "api-key": "",
+      "api-key": "", // TODO: Add your Azure Search Admin API key here
     },
     body: JSON.stringify(payload),
   });
