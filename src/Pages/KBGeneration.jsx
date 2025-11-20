@@ -4,7 +4,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import ControlPanel from "../Components/KBGenerator/ControlPanel";
 import ResultsPanel from "../Components/KBGenerator/ResultsPanel";
 import DataPreviewDialog from "../Components/KBGenerator/DataPreviewDialog";
-import KBDialog from "../Components/KBGenerator/KBDialog";
+import KBArticleDialog from "../Components/Common/KBArticleDialog";
 import { AzureOpenAI } from "openai";
 import ConsoleLog from "../Components/Common/ConsoleLog";
 
@@ -411,9 +411,9 @@ export default function KBGeneratorPage() {
       </Grid>
 
       {/* Dialogs */}
-      <KBDialog
+      <KBArticleDialog
         open={dialogOpen}
-        kb={selectedKB}
+        article={selectedKB}
         onClose={() => setDialogOpen(false)}
       />
       <DataPreviewDialog

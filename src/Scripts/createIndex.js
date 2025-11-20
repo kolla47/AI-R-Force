@@ -1,62 +1,60 @@
+import dotenv from 'dotenv';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+// Load environment variables
+dotenv.config();
+
+// Get current directory for ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load index structure from JSON file
+const indexStructPath = join(__dirname, '../SupportData/kb-index-struc.json');
+const indexStructure = JSON.parse(readFileSync(indexStructPath, 'utf-8'));
+
 export default async function createIndexRest() {
-  const url = `https://ai-r-search.search.windows.net/indexes/kb-index?api-version=2024-07-01`;
+  const searchEndpoint = process.env.REACT_APP_AZURE_SEARCH_ENDPOINT;
+  const searchKey = process.env.REACT_APP_AZURE_SEARCH_KEY;
+  const indexName = process.env.REACT_APP_AZURE_SEARCH_INDEX || 'ai-r-kb-index';
+
+  if (!searchEndpoint || !searchKey) {
+    console.error('❌ Error: Missing required environment variables.');
+    console.error('   Please ensure REACT_APP_AZURE_SEARCH_ENDPOINT and REACT_APP_AZURE_SEARCH_KEY are set in .env');
+    process.exit(1);
+  }
+
+  const url = `${searchEndpoint}/indexes/${indexName}?api-version=2024-07-01`;
+  
+  // Use the index structure from the JSON file
   const payload = {
-    name: "AI_R_Force-KB",
-    fields: [
-      { name: "id", type: "Edm.String", key: true },
-      { name: "title", type: "Edm.String", searchable: true },
-      { name: "tags", type: "Collection(Edm.String)", searchable: true },
-      {
-        name: "status",
-        type: "Edm.String",
-        searchable: true,
-        filterable: true,
-      },
-      { name: "KB", type: "Edm.String", searchable: true },
-      {
-        name: "vector",
-        type: "Collection(Edm.Single)",
-        searchable: true,
-        dimensions: 1536,
-        vectorSearchProfile: "default-vector-profile",
-      },
-    ],
-    vectorSearch: {
-      algorithms: [
-        {
-          name: "default-hnsw-config",
-          kind: "hnsw",
-          hnswParameters: {
-            m: 4,
-            efConstruction: 400,
-            efSearch: 500,
-            metric: "cosine",
-          },
-        },
-      ],
-      profiles: [
-        {
-          name: "default-vector-profile",
-          algorithm: "default-hnsw-config",
-        },
-      ],
-    },
+    name: indexStructure.name,
+    fields: indexStructure.fields,
+    vectorSearch: indexStructure.vectorSearch,
+    corsOptions: indexStructure.corsOptions,
   };
+
+  console.log(`🔧 Creating index: ${payload.name}`);
+  console.log(`📍 Endpoint: ${searchEndpoint}`);
 
   const response = await fetch(url.trim(), {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      "api-key": "", // TODO: Add your Azure Search Admin API key here
+      "api-key": searchKey,
     },
     body: JSON.stringify(payload),
   });
 
   const data = await response.json();
   if (!response.ok) {
-    console.error("Error:", data);
+    console.error("❌ Error creating index:", data);
+    process.exit(1);
   } else {
-    console.log("Index created via REST ✅");
+    console.log("✅ Index created successfully!");
+    console.log(`   Name: ${payload.name}`);
+    console.log(`   Fields: ${payload.fields.length}`);
   }
 }
 

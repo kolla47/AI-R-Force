@@ -5,15 +5,10 @@ import {
   Chip,
   Box,
   Stack,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  IconButton,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
-import ReactMarkdown from "react-markdown";
+import KBArticleDialog from "../Common/KBArticleDialog";
 
 export default function ArticleCard({ article, index }) {
   const [hovered, setHovered] = useState(false);
@@ -101,24 +96,12 @@ export default function ArticleCard({ article, index }) {
         </Card>
       </motion.div>
 
-      {/* Popup for Markdown Content */}
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
-        <DialogTitle
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          {article.title}
-          <IconButton onClick={handleClose}>
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent dividers>
-          <ReactMarkdown>{article.KB || ""}</ReactMarkdown>
-        </DialogContent>
-      </Dialog>
+      {/* KB Article Dialog */}
+      <KBArticleDialog
+        open={open}
+        article={article}
+        onClose={handleClose}
+      />
     </Box>
   );
 }
