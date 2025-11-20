@@ -2,7 +2,6 @@
   "name": "hackathon-ui",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "dependencies": {
     "@azure/identity": "latest",
     "@azure/openai": "^2.0.0",
